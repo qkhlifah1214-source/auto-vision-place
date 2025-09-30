@@ -1,12 +1,49 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import HeroSection from "@/components/home/HeroSection";
+import FeaturedCars from "@/components/home/FeaturedCars";
 
 const Index = () => {
+  const [isRTL, setIsRTL] = useState(true); // Default to Arabic
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    // Set document direction based on language
+    document.documentElement.dir = isRTL ? "rtl" : "ltr";
+    document.documentElement.lang = isRTL ? "ar" : "en";
+  }, [isRTL]);
+
+  const toggleLanguage = () => {
+    setIsRTL(!isRTL);
+  };
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
+  if (!mounted) {
+    return null;
+  }
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Header 
+        isRTL={isRTL}
+        toggleLanguage={toggleLanguage}
+        isDarkMode={theme === "dark"}
+        toggleTheme={toggleTheme}
+      />
+      
+      <main>
+        <HeroSection isRTL={isRTL} />
+        <FeaturedCars isRTL={isRTL} />
+      </main>
+      
+      <Footer isRTL={isRTL} />
     </div>
   );
 };
