@@ -14,16 +14,215 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      cars: {
+        Row: {
+          category_id: string | null
+          city: string | null
+          color: string | null
+          created_at: string | null
+          description: string | null
+          featured: boolean | null
+          fuel_type: string | null
+          id: string
+          images: string[] | null
+          mileage: number | null
+          price: number
+          status: string | null
+          title: string
+          transmission: string | null
+          updated_at: string | null
+          user_id: string
+          views: number | null
+          year: number
+        }
+        Insert: {
+          category_id?: string | null
+          city?: string | null
+          color?: string | null
+          created_at?: string | null
+          description?: string | null
+          featured?: boolean | null
+          fuel_type?: string | null
+          id?: string
+          images?: string[] | null
+          mileage?: number | null
+          price: number
+          status?: string | null
+          title: string
+          transmission?: string | null
+          updated_at?: string | null
+          user_id: string
+          views?: number | null
+          year: number
+        }
+        Update: {
+          category_id?: string | null
+          city?: string | null
+          color?: string | null
+          created_at?: string | null
+          description?: string | null
+          featured?: boolean | null
+          fuel_type?: string | null
+          id?: string
+          images?: string[] | null
+          mileage?: number | null
+          price?: number
+          status?: string | null
+          title?: string
+          transmission?: string | null
+          updated_at?: string | null
+          user_id?: string
+          views?: number | null
+          year?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cars_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cars_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      categories: {
+        Row: {
+          created_at: string | null
+          icon: string | null
+          id: string
+          name_ar: string
+          name_en: string
+        }
+        Insert: {
+          created_at?: string | null
+          icon?: string | null
+          id?: string
+          name_ar: string
+          name_en: string
+        }
+        Update: {
+          created_at?: string | null
+          icon?: string | null
+          id?: string
+          name_ar?: string
+          name_en?: string
+        }
+        Relationships: []
+      }
+      favorites: {
+        Row: {
+          car_id: string
+          created_at: string | null
+          id: string
+          user_id: string
+        }
+        Insert: {
+          car_id: string
+          created_at?: string | null
+          id?: string
+          user_id: string
+        }
+        Update: {
+          car_id?: string
+          created_at?: string | null
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "favorites_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "favorites_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          city: string | null
+          created_at: string | null
+          full_name: string | null
+          id: string
+          phone: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          city?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          city?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string | null
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_roles_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: {
+        Args: { user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +349,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
