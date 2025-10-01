@@ -219,7 +219,7 @@ const CreateAd = () => {
         </Card>
       </main>
 
-      <Footer />
+      <Footer isRTL={isRTL} />
     </div>
   );
 };

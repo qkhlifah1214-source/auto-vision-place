@@ -184,7 +184,7 @@ const Ads = () => {
         )}
       </main>
 
-      <Footer />
+      <Footer isRTL={isRTL} />
     </div>
   );
 };

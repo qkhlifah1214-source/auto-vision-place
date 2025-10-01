@@ -173,7 +173,7 @@ const Profile = () => {
         </Tabs>
       </main>
 
-      <Footer />
+      <Footer isRTL={isRTL} />
     </div>
   );
 };

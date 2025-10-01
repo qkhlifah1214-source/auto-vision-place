@@ -74,8 +74,8 @@ const CarDetails = () => {
   };
 
   const incrementViews = async () => {
-    await supabase.rpc("increment", {
-      row_id: id,
+    await supabase.rpc("increment_car_views", {
+      car_id: id,
     });
   };
 
@@ -246,7 +246,7 @@ const CarDetails = () => {
         </div>
       </main>
 
-      <Footer />
+      <Footer isRTL={isRTL} />
     </div>
   );
 };
