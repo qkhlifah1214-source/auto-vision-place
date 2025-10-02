@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      car_models: {
+        Row: {
+          created_at: string
+          id: string
+          make: string
+          model: string
+          year: number | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          make: string
+          model: string
+          year?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          make?: string
+          model?: string
+          year?: number | null
+        }
+        Relationships: []
+      }
       cars: {
         Row: {
           category_id: string | null
@@ -99,6 +123,7 @@ export type Database = {
           id: string
           name_ar: string
           name_en: string
+          section_id: string | null
         }
         Insert: {
           created_at?: string | null
@@ -106,6 +131,7 @@ export type Database = {
           id?: string
           name_ar: string
           name_en: string
+          section_id?: string | null
         }
         Update: {
           created_at?: string | null
@@ -113,8 +139,17 @@ export type Database = {
           id?: string
           name_ar?: string
           name_en?: string
+          section_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "categories_section_id_fkey"
+            columns: ["section_id"]
+            isOneToOne: false
+            referencedRelation: "sections"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       favorites: {
         Row: {
@@ -152,6 +187,80 @@ export type Database = {
           },
         ]
       }
+      messages: {
+        Row: {
+          car_id: string | null
+          created_at: string
+          id: string
+          message: string
+          read: boolean | null
+          receiver_id: string
+          sender_id: string
+        }
+        Insert: {
+          car_id?: string | null
+          created_at?: string
+          id?: string
+          message: string
+          read?: boolean | null
+          receiver_id: string
+          sender_id: string
+        }
+        Update: {
+          car_id?: string | null
+          created_at?: string
+          id?: string
+          message?: string
+          read?: boolean | null
+          receiver_id?: string
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      offers: {
+        Row: {
+          active: boolean | null
+          created_at: string
+          description_ar: string | null
+          description_en: string | null
+          expires_at: string | null
+          id: string
+          image_url: string | null
+          title_ar: string
+          title_en: string
+        }
+        Insert: {
+          active?: boolean | null
+          created_at?: string
+          description_ar?: string | null
+          description_en?: string | null
+          expires_at?: string | null
+          id?: string
+          image_url?: string | null
+          title_ar: string
+          title_en: string
+        }
+        Update: {
+          active?: boolean | null
+          created_at?: string
+          description_ar?: string | null
+          description_en?: string | null
+          expires_at?: string | null
+          id?: string
+          image_url?: string | null
+          title_ar?: string
+          title_en?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -179,6 +288,30 @@ export type Database = {
           id?: string
           phone?: string | null
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      sections: {
+        Row: {
+          created_at: string
+          icon: string | null
+          id: string
+          name_ar: string
+          name_en: string
+        }
+        Insert: {
+          created_at?: string
+          icon?: string | null
+          id?: string
+          name_ar: string
+          name_en: string
+        }
+        Update: {
+          created_at?: string
+          icon?: string | null
+          id?: string
+          name_ar?: string
+          name_en?: string
         }
         Relationships: []
       }

@@ -125,17 +125,20 @@ const Profile = () => {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {myCars.map((car) => (
-                  <Card key={car.id} className="cursor-pointer hover:shadow-lg transition" onClick={() => navigate(`/car/${car.id}`)}>
-                    <img src={car.images[0] || "/placeholder.svg"} alt={car.title} className="w-full h-48 object-cover rounded-t-lg" />
+                  <Card key={car.id} className="hover:shadow-lg transition">
+                    <img src={car.images[0] || "/placeholder.svg"} alt={car.title} className="w-full h-48 object-cover rounded-t-lg cursor-pointer" onClick={() => navigate(`/car/${car.id}`)} />
                     <CardContent className="p-4">
                       <div className="flex justify-between items-start mb-2">
-                        <h3 className="font-bold line-clamp-1">{car.title}</h3>
+                        <h3 className="font-bold line-clamp-1 cursor-pointer" onClick={() => navigate(`/car/${car.id}`)}>{car.title}</h3>
                         <Badge variant={car.status === "active" ? "default" : "secondary"}>
                           {car.status === "active" ? "نشط" : car.status === "sold" ? "مباع" : "معلق"}
                         </Badge>
                       </div>
-                      <p className="text-xl font-bold text-primary">{car.price.toLocaleString()} ريال</p>
-                      <p className="text-sm text-muted-foreground">{car.views} مشاهدة</p>
+                      <p className="text-xl font-bold text-primary mb-2">{car.price.toLocaleString()} ريال</p>
+                      <p className="text-sm text-muted-foreground mb-3">{car.views} مشاهدة</p>
+                      <Button size="sm" className="w-full" onClick={() => navigate(`/edit-ad/${car.id}`)}>
+                        تعديل الإعلان
+                      </Button>
                     </CardContent>
                   </Card>
                 ))}

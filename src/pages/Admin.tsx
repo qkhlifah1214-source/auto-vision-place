@@ -116,7 +116,23 @@ const Admin = () => {
       />
 
       <main className="container mx-auto px-4 py-8 mt-20">
-        <h1 className="text-4xl font-bold mb-8">لوحة التحكم</h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-4xl font-bold">لوحة التحكم</h1>
+          <div className="flex gap-2 flex-wrap">
+            <Button variant="outline" size="sm" onClick={() => navigate("/admin/sections")}>
+              إدارة الأقسام
+            </Button>
+            <Button variant="outline" size="sm" onClick={() => navigate("/admin/categories")}>
+              إدارة الفئات
+            </Button>
+            <Button variant="outline" size="sm" onClick={() => navigate("/admin/car-models")}>
+              إدارة الموديلات
+            </Button>
+            <Button variant="outline" size="sm" onClick={() => navigate("/admin/users")}>
+              إدارة المستخدمين
+            </Button>
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card>

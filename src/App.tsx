@@ -12,6 +12,13 @@ import Ads from "./pages/Ads";
 import CreateAd from "./pages/CreateAd";
 import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
+import EditAd from "./pages/EditAd";
+import Messages from "./pages/Messages";
+import Settings from "./pages/Settings";
+import AdminSections from "./pages/AdminSections";
+import AdminCategories from "./pages/AdminCategories";
+import AdminCarModels from "./pages/AdminCarModels";
+import AdminUsers from "./pages/AdminUsers";
 
 const queryClient = new QueryClient();
 
@@ -28,8 +35,15 @@ const App = () => (
             <Route path="/car/:id" element={<CarDetails />} />
             <Route path="/ads" element={<Ads />} />
             <Route path="/create-ad" element={<CreateAd />} />
+            <Route path="/edit-ad/:id" element={<EditAd />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/sections" element={<AdminSections />} />
+            <Route path="/admin/categories" element={<AdminCategories />} />
+            <Route path="/admin/car-models" element={<AdminCarModels />} />
+            <Route path="/admin/users" element={<AdminUsers />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
